@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Kanupriya ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+body {
+    margin:0;
+    background:#f6f2ec;
+    font-family:'Poppins',sans-serif;
+    color:#333;
+    overflow-x:hidden;
+}
+section {
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:40px 20px;
+    text-align:center;
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s ease;
+}
+section.visible {
+    opacity:1;
+    transform:translateY(0);
+}
+h1,h2 {
+    font-family:'Playfair Display',serif;
+}
+.slider {
+    position:relative;
+    width:90%;
+    max-width:420px;
+    height:520px;
+    overflow:hidden;
+    border-radius:14px;
+    box-shadow:0 15px 35px rgba(0,0,0,0.15);
+}
+.slide {
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-size:cover;
+    background-position:center;
+    opacity:0;
+    transition:opacity 1.5s ease-in-out;
+}
+.slide.active {
+    opacity:1;
+}
+.fade-text {
+    max-width:650px;
+    line-height:1.8;
+    font-size:17px;
+    margin-top:25px;
+}
+button {
+    padding:12px 28px;
+    margin:15px;
+    border-radius:30px;
+    border:none;
+    font-size:16px;
+    cursor:pointer;
+    transition:0.3s;
+}
+.primary {
+    background:#d4af37;
+    color:white;
+}
+.primary:hover {
+    transform:scale(1.05);
+}
+.secondary {
+    background:#eee;
+}
+.envelope {
+    width:220px;
+    height:130px;
+    background:#d4af37;
+    position:relative;
+    margin:40px auto;
+    cursor:pointer;
+    transition:0.4s;
+}
+.envelope:hover {
+    transform:scale(1.05);
+}
+.envelope:before {
+    content:"";
+    position:absolute;
+    top:-65px;
+    left:0;
+    border-left:110px solid transparent;
+    border-right:110px solid transparent;
+    border-bottom:65px solid #c19b2e;
+}
+.hidden { display:none; }
+</style>
+</head>
+<body>
+
+<audio id="bgmusic" loop>
+    <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
+<section onclick="startMusic()">
+<h1>Akhdu ❤️ Chep</h1>
+<div class="slider" data-folder="scene1" data-count="2"></div>
+<div class="fade-text">
+First year. Same class. Zero compatibility.<br>
+You thought I was chep. I thought you were akhdu.<br>
+Six years later… still Chep.
+</div>
+</section>
+
+<section>
+<h2>College Days</h2>
+<div class="slider" data-folder="college" data-count="4"></div>
+<div class="fade-text">
+We started talking. Sharing notes. Sharing life.<br>
+Without realising… we became best friends.
+</div>
+</section>
+
+<section>
+<h2>CCD Era ☕</h2>
+<div class="slider" data-folder="ccd" data-count="5"></div>
+<div class="fade-text">
+Our headquarters. 90% of our life happened here.<br>
+Even the staff knew our order.
+</div>
+</section>
+
+<section>
+<h2>Mussoorie 2025 🏔</h2>
+<div class="slider" data-folder="mussoorie" data-count="2"></div>
+<div class="fade-text">
+Mountains. 5AM talks. Dancing like idiots.<br>
+That night felt paused in time.
+</div>
+</section>
+
+<section>
+<h2>The Truth</h2>
+<div class="slider" data-folder="truth" data-count="4"></div>
+<div class="fade-text">
+We saw heartbreaks, silence, laughter, growth.<br>
+Not everyone gets a love story —<br>
+but we got something rare.
+</div>
+</section>
+
+<section>
+<h2>One Last Ask</h2>
+<div class="slider" data-folder="final" data-count="1"></div>
+<div class="fade-text">
+I wish you peace and happiness — the kind that stays.<br><br>
+Before life takes us in different directions…<br>
+May I have 24 hours of your unfiltered time?<br>
+No pressure. Just one honest date.
+</div>
+
+<div class="envelope" onclick="openFinal()"></div>
+
+<div id="finalBox" class="hidden">
+<button class="primary" onclick="celebrate()">Give Chep 24 Hours</button>
+<button class="secondary">Maybe</button>
+</div>
+
+</section>
+
+<script>
+
+function startMusic(){
+    document.getElementById("bgmusic").play();
+}
+
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(sec=>{
+if(sec.getBoundingClientRect().top<window.innerHeight-100){
+sec.classList.add("visible");
+}});
+});
+
+// Auto slideshow logic
+document.querySelectorAll(".slider").forEach(slider=>{
+    const folder=slider.dataset.folder;
+    const count=parseInt(slider.dataset.count);
+    let slides=[];
+    for(let i=1;i<=count;i++){
+        const div=document.createElement("div");
+        div.className="slide";
+        div.style.backgroundImage=`url(assets/${folder}_${i}.jpg)`;
+        slider.appendChild(div);
+        slides.push(div);
+    }
+    let index=0;
+    slides[0].classList.add("active");
+    setInterval(()=>{
+        slides[index].classList.remove("active");
+        index=(index+1)%slides.length;
+        slides[index].classList.add("active");
+    },3500);
+});
+
+function openFinal(){
+    document.getElementById("finalBox").classList.remove("hidden");
+}
+
+function celebrate(){
+    alert("Date Confirmed ❤️");
+}
+
+</script>
+
+</body>
+</html>
